@@ -93,7 +93,12 @@ def grammar_check(inputs):
                 'model': 't2t',
                 'content' 'This sentence would be checked by the model of grammar error correction.'
             }
-        :return: json
+        return: 
+         {
+                'corrected': output,
+                'origin': origin
+         }
+    }
 
     '''
     #source = request.form['model']
@@ -102,9 +107,9 @@ def grammar_check(inputs):
     #inputs = 'People get certain disease because of genetic changes.'
     #origin = inputs
     inputs = ' '.join([token.orth_ for token in nlp(inputs)])
-    origin = inputs
     print(inputs)
     inputs = bpe.process_line(inputs)
+    origin = inputs
     print(inputs)
     outputs = serving_utils.predict([inputs], model_list[source].problem, model_list[source].request)
     outputs, = outputs
